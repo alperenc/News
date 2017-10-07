@@ -17,6 +17,11 @@ public class Content {
     private String section;
 
     /**
+     * Url of the news item
+     */
+    private String url;
+
+    /**
      * Author of the news item
      */
     private String author;
@@ -31,12 +36,14 @@ public class Content {
      *
      * @param title   is the title of the news item
      * @param section is the section the news item belongs
+     * @param url     is the url of the news item
      * @param author  is the author of the news item if provided
      * @param date    is the publish date of the news item if provided
      */
-    public Content(String title, String section, String author, String date) {
+    public Content(String title, String section, String url, String author, String date) {
         this.title = title;
         this.section = section;
+        this.url = url;
         this.author = author;
         this.date = date;
     }
@@ -53,6 +60,13 @@ public class Content {
      */
     public String getSection() {
         return section;
+    }
+
+    /**
+     * @return url of the news item
+     */
+    public String getUrl() {
+        return url;
     }
 
     /**

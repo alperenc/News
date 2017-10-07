@@ -187,6 +187,9 @@ public class QueryUtils {
                 // Extract the value for section.
                 String section = currentNewsItem.getString("sectionName");
 
+                //Extract the value for url.
+                String url = currentNewsItem.getString("webUrl");
+
                 // Extract the value for the key called "thumbnail" if there are any dates.
                 String dateString = "";
                 if (currentNewsItem.has("webPublicationDate")) {
@@ -204,7 +207,7 @@ public class QueryUtils {
 
                 // Create a new {@link Volume} object with the title, authors, and thumbnail,
                 // from the JSON response.
-                Content newsItem = new Content(title, section, author, dateString);
+                Content newsItem = new Content(title, section, url, author, dateString);
 
                 // Add the new {@link Volume} to the list of volumes.
                 newsItems.add(newsItem);

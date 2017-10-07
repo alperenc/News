@@ -1,5 +1,8 @@
 package com.alperencan.news.android.adapter;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,9 +22,11 @@ import java.util.List;
 public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentViewHolder> {
 
     private List<Content> newsItems;
+    private Context context;
 
-    public ContentAdapter(List<Content> newsItems) {
+    public ContentAdapter(Context context, List<Content> newsItems) {
         this.newsItems = newsItems;
+        this.context = context;
     }
 
     /**
@@ -52,12 +57,26 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
      */
     @Override
     public void onBindViewHolder(ContentViewHolder holder, int position) {
-        Content newsItem = newsItems.get(position);
+        final Content newsItem = newsItems.get(position);
 
         holder.titleView.setText(newsItem.getTitle());
         holder.sectionView.setText(newsItem.getSection());
         holder.authorView.setText(newsItem.getAuthor());
         holder.dateView.setText(newsItem.getDate());
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Convert the String URL into a URI object (to pass into the Intent constructor)
+                Uri newsUri = Uri.parse(newsItem.getUrl());
+
+                // Create a new intent to view the news item URI
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, newsUri);
+
+                // Send the intent to launch a new activity
+                context.startActivity(websiteIntent);
+            }
+        });
     }
 
     /**

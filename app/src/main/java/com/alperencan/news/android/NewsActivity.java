@@ -75,7 +75,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<L
         recyclerView.setLayoutManager(layoutManager);
 
         // Create a new adapter that takes an empty list of news items as input
-        adapter = new ContentAdapter(new ArrayList<Content>());
+        adapter = new ContentAdapter(this, new ArrayList<Content>());
 
         // Set the adapter on the {@link RecyclerView}
         // so the list can be populated in the user interface
@@ -106,6 +106,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<L
             emptyView.setText(R.string.no_internet_connection);
         }
 
+
     }
 
     @Override
@@ -122,7 +123,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<L
             // Set empty state text to display "No news items found."
             emptyView.setText(R.string.no_data_available);
         } else {
-            adapter = new ContentAdapter(newsItems);
+            adapter = new ContentAdapter(this, newsItems);
             recyclerView.setAdapter(adapter);
         }
 
